@@ -257,4 +257,60 @@ document.addEventListener('DOMContentLoaded', () => {
     footerYear.textContent = footerYear.textContent.replace('2024', new Date().getFullYear());
   }
 
+  /* ── FACILITIES CATEGORY TRACKING ────────── */
+  const catPills = document.querySelectorAll('.cat-pill');
+  const facSections = document.querySelectorAll('.fac-section');
+
+  if (catPills.length > 0) {
+    const facObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          catPills.forEach(pill => {
+            pill.classList.toggle('active', pill.getAttribute('href') === '#' + id);
+            if (pill.classList.contains('active')) {
+              pill.style.background = 'var(--teal)';
+              pill.style.color = 'white';
+            } else {
+              pill.style.background = '';
+              pill.style.color = '';
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+
+    facSections.forEach(section => facObserver.observe(section));
+  }
+
+  /* ── LIGHTBOX FUNCTIONALITY ──────────────── */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.querySelector('.lightbox-close');
+
+  if (lightbox) {
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'block';
+        lightboxImg.src = img.src;
+        lightboxCaption.innerHTML = img.alt;
+        document.body.style.overflow = 'hidden'; // Disable scroll
+      });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = ''; // Enable scroll
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
 });

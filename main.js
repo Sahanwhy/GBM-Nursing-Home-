@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   animateFollower();
 
-  document.querySelectorAll('a, button, .fac-card, .spec-item, .ins-card, .pillar').forEach(el => {
+  document.querySelectorAll('a, button, .fac-card, .spec-item, .ins-card, .pillar, .doctor-card, .filter-btn').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
@@ -310,6 +310,43 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.style.display = 'none';
         document.body.style.overflow = '';
       }
+    });
+  }
+
+  /* ── SPECIALTIES FILTERING ──────────────── */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const specialtySections = document.querySelectorAll('.specialty-section');
+
+  if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (target === 'all') {
+          specialtySections.forEach(sec => {
+            sec.style.display = 'block';
+            setTimeout(() => sec.style.opacity = '1', 10);
+          });
+        } else {
+          specialtySections.forEach(sec => {
+            if (sec.id === target) {
+              sec.style.display = 'block';
+              setTimeout(() => sec.style.opacity = '1', 10);
+              // Scroll to section
+              const offset = 160;
+              const top = sec.getBoundingClientRect().top + window.pageYOffset - offset;
+              window.scrollTo({ top, behavior: 'smooth' });
+            } else {
+              sec.style.display = 'none';
+              sec.style.opacity = '0';
+            }
+          });
+        }
+      });
     });
   }
 

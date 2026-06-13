@@ -421,7 +421,6 @@ body.cursor-hover #cursor-follower {
   z-index: 0;
 }
 
-#navbar,
 #hero {
   position: relative;
   z-index: 1;

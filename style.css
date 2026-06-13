@@ -1616,6 +1616,10 @@ body.cursor-hover #cursor-follower {
   text-align: center;
 }
 
+.facilities-page .page-header {
+  background: linear-gradient(135deg, var(--teal-dark), var(--dark));
+}
+
 .page-header .section-label {
   background: rgba(255, 255, 255, 0.1);
   color: var(--gold);

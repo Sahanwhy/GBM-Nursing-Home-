@@ -1881,7 +1881,7 @@ body.cursor-hover #cursor-follower {
 
 .specialties-hero {
   padding: 160px 0 100px;
-  background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+  background: linear-gradient(135deg, rgba(6, 78, 78, 0.85) 0%, rgba(10, 110, 110, 0.85) 100%), url('images/specialist.png') center/cover no-repeat;
   color: white;
   text-align: center;
   position: relative;
